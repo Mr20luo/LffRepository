@@ -1,0 +1,49 @@
+create table appuser(
+id number(5) primary key,
+name varchar2(200) not null unique,
+age number(3) not null,
+adress varchar2(200)
+);
+
+--insert into
+insert into appuser values(2,'zhangsan1',32,'YUNNAN.China');
+
+
+
+
+begin
+     for qq in 101..100000 loop     -- qq 临时迭代名 从1开始 循环100次
+      insert into appuser values(qq,concat('zhangsan',qq),32,'YUNNAN.China');
+     commit;   --  提交
+   end loop;   --  结束循环
+end;
+
+
+--批量修改地址
+declare
+add varchar2(50):='云南省昭通市区A';
+begin
+  for qq in(select * from appuser)loop   -- in()会记录表的基本信息 总条数 各个字段的信息 例如：qq.id....
+   update appuser set adress=add where id=qq.id;
+  commit;
+   end loop;
+end;
+
+
+select * from appuser  s where name='zhangsan'
+
+select * from appuser s limit 1，5
+-- 分页
+
+1   5  第一   2*5-5   1*5     pageno=pagenum*pagesize-pagesize
+                              pagesize=pagenum*pagesize
+5    10 第二 2*5-5   2*5
+10    15 三 3*5-5     3*5
+页数 条数
+
+
+
+select *
+  from (select t.*, rownum as no
+          from (select * from appuser order by id desc) t)
+ where no between 1 and 5

@@ -1,0 +1,21 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/db1
+    username: syplat
+    password: sysoft
+    driver-class-name: oracle.jdbc.OracleDriver
+  thymeleaf:
+    prefix: classpath:/templates/
+    encoding: UTF-8
+    cache: false
+    content-type: text/html
+    mode: HTML5
+    suffix: .html
+  mvc:
+    date-format: yyyy-MM-dd  #日期格式化
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-a1iases-package: com.example.springboot_oracle_conn.bo

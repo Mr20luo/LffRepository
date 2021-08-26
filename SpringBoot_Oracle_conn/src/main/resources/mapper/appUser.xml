@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot_oracle_conn.dao.appUserDao">
+
+    <resultMap id="BaseResultMap" type="com.example.springboot_oracle_conn.bo.appUser">
+        <!--@Table sys_user-->
+        <result property="id" column="id" jdbcType="OTHER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="VARCHAR"/>
+        <result property="adress" column="adress" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询所有-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select * from appuser  s
+    </select>
+
+    <!--插入-->
+    <insert id="insert"  >
+        insert into appuser values(#{id},#{name},#{age},#{adress})
+    </insert>
+
+
+    <!--修改-->
+    <update id="update">
+       update appuser set name=#{name},age=#{age},adress=#{adress} where id=#{id}
+    </update>
+
+
+    <!--删除-->
+    <delete id="delete" >
+        delete from appuser where id=#{id}
+    </delete>
+
+
+    <!--分页查询-->
+    <select id="queryAllByPage" resultMap="BaseResultMap">
+        select *
+        from (select t.*, rownum as no
+              from (select * from appuser order by id desc) t)
+        where no between #{start} and #{end}
+    </select>
+
+
+</mapper>

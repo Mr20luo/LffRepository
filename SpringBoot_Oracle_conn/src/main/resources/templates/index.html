@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><!--引入命名空间-->
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+<body>
+<h1>主页</h1>
+<HR>
+<!--th:each循环集合-->
+<ul th:each="ap,sta:${apps}">
+    <li th:text="${ap}"></li>
+</ul>
+</body>
+</html>
